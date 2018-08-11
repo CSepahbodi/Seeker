@@ -1,6 +1,8 @@
+//when search button is clicked...
 $(".searchButton").on("click", function(event) {
     event.preventDefault();
     var searchValue= $(".searchInput").val().trim();
+    //Custom Google Image Search query URL
     var GIapi = "AIzaSyD7Wc63TRgw3TeJBIFVDSezSZKFc8i43ro"
     var GIqueryURL = "https://www.googleapis.com/customsearch/v1?searchType=image&key=" + GIapi + "&cx=003281430856125788303:ccpcjlqp7kq&q=" + searchValue;
     $.ajax({
@@ -8,7 +10,8 @@ $(".searchButton").on("click", function(event) {
         method: "GET",
     }).then(function(response) {
         console.log(response);
-
+    
+        //JQUERY to place image results into the body of the site.
     $("#googleImages").empty()
     var imgHeader = $("<h3 class='imgHeader'>").text("Pictures")
     var imgDivider = $("<div class='divider'>")
@@ -29,6 +32,7 @@ $(".searchButton").on("click", function(event) {
     }
     });
 
+    //NYTimes API query URL
     var NYTqueryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     NYTqueryURL += '?' + $.param({
         'api-key': "ebfd3fb4511c45b8a0f31b81f539debc",
@@ -55,6 +59,8 @@ $(".searchButton").on("click", function(event) {
              $('#theNews').append(newsdiv)
          }
      });
+     
+     //YouTube Query URL and API
      var ytAPIkey = "AIzaSyBFF-Z0wLlFirA44q-R_Yfg5Y_d59Ks9xY"
      var preYTurl = "https://www.youtube.com/watch?v="
      $.ajax({
@@ -64,6 +70,7 @@ $(".searchButton").on("click", function(event) {
         success: function(data) {
         console.log(data)
         
+        //Place the youtube content onto the body of the site using JQUERY
         $('#ytContent').empty()
         var ytHeader = $("<h3 class='ytHeader'>").text("Videos")
         var ytDivider = $("<div class='divider'>")
@@ -89,6 +96,7 @@ $(".searchButton").on("click", function(event) {
 
  });
  
+//Search button click funtion to change the header and search area once a search has been initiated by user.
 $(".searchButton").click(function(){
     $(".mainlogo").removeClass("center-align");
     $(".mainlogo").addClass("left s6 addimgmarg");
